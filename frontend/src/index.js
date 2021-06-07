@@ -1,5 +1,6 @@
 const BASE_URL = "http://localhost:3000"
 const GIFTS_URL = `${BASE_URL}/gifts`
+// const GIFTS_URL = `https://fakestoreapi.com/products`
 const USERS_URL = `${BASE_URL}/users`
 const FAVORITES_URL = `${BASE_URL}/favorites`
 const giftCollection = document.querySelector('#gift-collection')
@@ -24,10 +25,10 @@ class Gift {
 
     render() {
         return `<div class="card">
-                  <h2>${this.title} ($${this.price})</h2>
+                  <h2>${this.title.length > 35 ? this.title.slice(0,35) + '...' : this.title} ($${this.price})</h2>
                   <h4 class="gift-cat">${this.category}</h4>
                   <a href=${this.link} target="_blank"><img src=${this.image} class="gift-image" /></a>
-                  <p>${this.description}<p>
+                  <p>${this.description.length > 160 ? this.description.slice(0,160) + '...' : this.description}<p>
                   <button data-gift-id=${this.id} class="like-btn">♡</button>
                 </div>`
     }
@@ -35,7 +36,9 @@ class Gift {
 
 function putGiftsOnDom(giftArray){
     giftCollection.innerHTML = `<h2 class="subheader">All Gift Ideas</h2>
-                                <h4 class="favorites-link">View My Favorites ♡</h4>`
+                                <button class="favorites-link">View My Favorites ♡</button>
+                                <br/><br/><br/>`
+                                
     giftArray.forEach(gift => {
         giftCollection.innerHTML += new Gift(gift).render()
     })
@@ -68,12 +71,13 @@ function fetchFavorites(){
 }
 
 signupForm.addEventListener('submit', function(e){
-    e.preventDefault()
+    e.preventDefault();
+    console.log('gdddot here==>>', e, 'll', signupInputs)
     fetch(USERS_URL, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            Accept: "application/json"
+            //Accept: "application/json"
         },
         body: JSON.stringify({
             user: {
@@ -84,14 +88,14 @@ signupForm.addEventListener('submit', function(e){
     })
     .then(res => res.json())
     .then(function(object){
+        console.log('got here==>>', object)
         if (object.message) {
-            alert(object.message)
+           alert(object.message)
         }
         else {
         loggedInUser(object)
         }
-    }
-    )
+    }).catch(err => console.log('an error occured==>>', err))  
 })
 
 giftCollection.addEventListener('click', function(e) {
@@ -117,6 +121,15 @@ function loggedInUser(object){
     logout.innerText = "Logout"
     fetchGifts()
 }
+
+logout.addEventListener('click', (e) => {
+    signupForm.style.display = 'block';
+    welcome.innerHTML = '';
+    logout.innerText = "";
+    giftCollection.innerHTML = '';
+    signupInputs[0].value = '';
+    signupInputs[1].value = '';
+})
 
 giftCollection.addEventListener('click', function(e){
     // console.log(event.target.className, event.target.style.color)
