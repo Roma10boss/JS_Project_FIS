@@ -18,18 +18,7 @@ class FavoritesController < ApplicationController
         user = User.find(user_id)
         favorites = user.favorites
         render json: favorites, include: [:gift]
-        # rendering related object data in JSON by nesting models
-        # result:
-          #       {
-          # "id": 2,
-          # "user_id": 1,
-          # "gift": {
-          #   "id": 4,
-          #   "title": "Airpods",
-          #   "category": "tech",
-          #   "created_at": "2019-05-14T11:20:37.177Z",
-          #   "updated_at": "2019-05-14T11:20:37.177Z"
-          # }
+        
     end
 
     def destroy
