@@ -16,7 +16,7 @@ How to get set up:
         and logout when done
 
 CONTRIBUTION
-    veryone is allow to contribute and enjoy!
+    Everyone is allow to contribute and enjoy!
 
 LICENSE
     The gem is available as open source under the terms of the MIT License.

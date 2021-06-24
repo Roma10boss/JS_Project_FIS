@@ -5916,3 +5916,1289 @@ Processing by FavoritesController#index as */*
 Completed 200 OK in 2ms (Views: 0.9ms | ActiveRecord: 0.5ms | Allocations: 1130)
 
 
+Started POST "/users" for ::1 at 2021-06-16 22:59:33 -0400
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"email"=>"qq@qq.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "qq@qq.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9:in `create'
+Completed 200 OK in 185ms (Views: 0.3ms | ActiveRecord: 0.8ms | Allocations: 7643)
+
+
+Started GET "/gifts" for ::1 at 2021-06-16 22:59:34 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.3ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 11ms (Views: 7.6ms | ActiveRecord: 0.9ms | Allocations: 9776)
+
+
+Started GET "/users/1/favorites" for ::1 at 2021-06-16 22:59:42 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.1ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 12ms (Views: 3.5ms | ActiveRecord: 0.8ms | Allocations: 4237)
+
+
+Started POST "/favorites" for ::1 at 2021-06-16 23:00:01 -0400
+Processing by FavoritesController#create as JSON
+  Parameters: {"user_id"=>"1", "gift_id"=>"1", "favorite"=>{"user_id"=>"1", "gift_id"=>"1"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mGift Load (0.1ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mFavorite Create (0.7ms)[0m  [1m[32mINSERT INTO "favorites" ("user_id", "gift_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["user_id", 1], ["gift_id", 1], ["created_at", "2021-06-17 03:00:01.612203"], ["updated_at", "2021-06-17 03:00:01.612203"]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+Completed 200 OK in 14ms (Views: 0.2ms | ActiveRecord: 2.6ms | Allocations: 7504)
+
+
+Started DELETE "/favorites/5" for ::1 at 2021-06-16 23:00:03 -0400
+Processing by FavoritesController#destroy as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mFavorite Load (0.2ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:26:in `destroy'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mFavorite Destroy (0.8ms)[0m  [1m[31mDELETE FROM "favorites" WHERE "favorites"."id" = ?[0m  [["id", 5]]
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+Completed 204 No Content in 5ms (ActiveRecord: 2.1ms | Allocations: 2759)
+
+
+Started POST "/favorites" for ::1 at 2021-06-16 23:00:04 -0400
+Processing by FavoritesController#create as JSON
+  Parameters: {"user_id"=>"1", "gift_id"=>"1", "favorite"=>{"user_id"=>"1", "gift_id"=>"1"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mGift Load (0.0ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mFavorite Create (0.8ms)[0m  [1m[32mINSERT INTO "favorites" ("user_id", "gift_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["user_id", 1], ["gift_id", 1], ["created_at", "2021-06-17 03:00:04.267552"], ["updated_at", "2021-06-17 03:00:04.267552"]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 2.2ms | Allocations: 4190)
+
+
+Started DELETE "/favorites/6" for ::1 at 2021-06-16 23:00:04 -0400
+Processing by FavoritesController#destroy as */*
+  Parameters: {"id"=>"6"}
+  [1m[36mFavorite Load (0.2ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:26:in `destroy'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mFavorite Destroy (0.8ms)[0m  [1m[31mDELETE FROM "favorites" WHERE "favorites"."id" = ?[0m  [["id", 6]]
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+Completed 204 No Content in 5ms (ActiveRecord: 2.1ms | Allocations: 2601)
+
+
+Started POST "/favorites" for ::1 at 2021-06-16 23:00:05 -0400
+Processing by FavoritesController#create as JSON
+  Parameters: {"user_id"=>"1", "gift_id"=>"1", "favorite"=>{"user_id"=>"1", "gift_id"=>"1"}}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mGift Load (0.0ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mFavorite Create (0.9ms)[0m  [1m[32mINSERT INTO "favorites" ("user_id", "gift_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["user_id", 1], ["gift_id", 1], ["created_at", "2021-06-17 03:00:05.826754"], ["updated_at", "2021-06-17 03:00:05.826754"]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+Completed 200 OK in 9ms (Views: 0.5ms | ActiveRecord: 2.3ms | Allocations: 4169)
+
+
+Started GET "/users/1/favorites" for ::1 at 2021-06-16 23:00:07 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.1ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+  [1m[36mGift Load (0.2ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 6ms (Views: 4.0ms | ActiveRecord: 0.5ms | Allocations: 2068)
+
+
+Started DELETE "/favorites/7" for ::1 at 2021-06-16 23:00:09 -0400
+Processing by FavoritesController#destroy as */*
+  Parameters: {"id"=>"7"}
+  [1m[36mFavorite Load (0.2ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:26:in `destroy'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mFavorite Destroy (0.8ms)[0m  [1m[31mDELETE FROM "favorites" WHERE "favorites"."id" = ?[0m  [["id", 7]]
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+Completed 204 No Content in 7ms (ActiveRecord: 1.9ms | Allocations: 2611)
+
+
+Started GET "/users/1/favorites" for ::1 at 2021-06-16 23:00:09 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.1ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 2ms (Views: 1.2ms | ActiveRecord: 0.2ms | Allocations: 1099)
+
+
+Started POST "/favorites" for ::1 at 2021-06-16 23:00:16 -0400
+Processing by FavoritesController#create as JSON
+  Parameters: {"user_id"=>"1", "gift_id"=>"20", "favorite"=>{"user_id"=>"1", "gift_id"=>"20"}}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mGift Load (0.1ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mFavorite Create (0.9ms)[0m  [1m[32mINSERT INTO "favorites" ("user_id", "gift_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["user_id", 1], ["gift_id", 20], ["created_at", "2021-06-17 03:00:16.953837"], ["updated_at", "2021-06-17 03:00:16.953837"]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+Completed 200 OK in 10ms (Views: 0.2ms | ActiveRecord: 2.3ms | Allocations: 4175)
+
+
+Started GET "/users/1/favorites" for ::1 at 2021-06-16 23:00:20 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.1ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+  [1m[36mGift Load (0.1ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 5ms (Views: 3.4ms | ActiveRecord: 0.4ms | Allocations: 2062)
+
+
+Started DELETE "/favorites/8" for ::1 at 2021-06-16 23:00:22 -0400
+Processing by FavoritesController#destroy as */*
+  Parameters: {"id"=>"8"}
+  [1m[36mFavorite Load (0.1ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:26:in `destroy'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mFavorite Destroy (0.8ms)[0m  [1m[31mDELETE FROM "favorites" WHERE "favorites"."id" = ?[0m  [["id", 8]]
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+Completed 204 No Content in 6ms (ActiveRecord: 1.9ms | Allocations: 2600)
+
+
+Started GET "/users/1/favorites" for ::1 at 2021-06-16 23:00:22 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.1ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 15ms (Views: 13.2ms | ActiveRecord: 0.2ms | Allocations: 1099)
+
+
+Started DELETE "/favorites/7" for ::1 at 2021-06-16 23:00:25 -0400
+Processing by FavoritesController#destroy as */*
+  Parameters: {"id"=>"7"}
+  [1m[36mFavorite Load (0.2ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:26:in `destroy'
+Completed 404 Not Found in 1ms (ActiveRecord: 0.2ms | Allocations: 489)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Favorite with 'id'=7):
+  
+app/controllers/favorites_controller.rb:26:in `destroy'
+Started POST "/favorites" for ::1 at 2021-06-16 23:00:25 -0400
+Processing by FavoritesController#create as JSON
+  Parameters: {"user_id"=>"1", "gift_id"=>"1", "favorite"=>{"user_id"=>"1", "gift_id"=>"1"}}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mGift Load (0.0ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mFavorite Create (0.8ms)[0m  [1m[32mINSERT INTO "favorites" ("user_id", "gift_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["user_id", 1], ["gift_id", 1], ["created_at", "2021-06-17 03:00:25.979210"], ["updated_at", "2021-06-17 03:00:25.979210"]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 2.0ms | Allocations: 4189)
+
+
+Started DELETE "/favorites/9" for ::1 at 2021-06-16 23:00:26 -0400
+Processing by FavoritesController#destroy as */*
+  Parameters: {"id"=>"9"}
+  [1m[36mFavorite Load (0.2ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:26:in `destroy'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mFavorite Destroy (0.7ms)[0m  [1m[31mDELETE FROM "favorites" WHERE "favorites"."id" = ?[0m  [["id", 9]]
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+Completed 204 No Content in 4ms (ActiveRecord: 2.0ms | Allocations: 2622)
+
+
+Started GET "/users/1/favorites" for ::1 at 2021-06-16 23:00:28 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.1ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 2ms (Views: 0.8ms | ActiveRecord: 0.2ms | Allocations: 1098)
+
+
+Started POST "/users" for ::1 at 2021-06-23 20:13:59 -0400
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"email"=>"qq@qq.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "qq@qq.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9:in `create'
+Completed 200 OK in 191ms (Views: 0.4ms | ActiveRecord: 1.0ms | Allocations: 7643)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 20:13:59 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.3ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 11ms (Views: 7.6ms | ActiveRecord: 0.9ms | Allocations: 9776)
+
+
+Started POST "/users" for ::1 at 2021-06-23 20:14:07 -0400
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"email"=>"qq@qq.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "qq@qq.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9:in `create'
+Completed 200 OK in 178ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 628)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 20:14:07 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.3ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 4ms (Views: 3.3ms | ActiveRecord: 0.3ms | Allocations: 3612)
+
+
+Started POST "/favorites" for ::1 at 2021-06-23 20:14:09 -0400
+Processing by FavoritesController#create as JSON
+  Parameters: {"user_id"=>"1", "gift_id"=>"1", "favorite"=>{"user_id"=>"1", "gift_id"=>"1"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mGift Load (0.1ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mFavorite Create (0.9ms)[0m  [1m[32mINSERT INTO "favorites" ("user_id", "gift_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["user_id", 1], ["gift_id", 1], ["created_at", "2021-06-24 00:14:10.027369"], ["updated_at", "2021-06-24 00:14:10.027369"]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+Completed 200 OK in 18ms (Views: 0.4ms | ActiveRecord: 3.2ms | Allocations: 8408)
+
+
+Started GET "/users/1/favorites" for ::1 at 2021-06-23 20:14:10 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.3ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+  [1m[36mGift Load (0.1ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 8ms (Views: 2.4ms | ActiveRecord: 0.6ms | Allocations: 3137)
+
+
+Started DELETE "/favorites/10" for ::1 at 2021-06-23 20:14:11 -0400
+Processing by FavoritesController#destroy as */*
+  Parameters: {"id"=>"10"}
+  [1m[36mFavorite Load (0.2ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:26:in `destroy'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mFavorite Destroy (0.9ms)[0m  [1m[31mDELETE FROM "favorites" WHERE "favorites"."id" = ?[0m  [["id", 10]]
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+Completed 204 No Content in 6ms (ActiveRecord: 2.5ms | Allocations: 2752)
+
+
+Started GET "/users/1/favorites" for ::1 at 2021-06-23 20:14:11 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.1ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 2ms (Views: 0.9ms | ActiveRecord: 0.3ms | Allocations: 1099)
+
+
+Started DELETE "/favorites/10" for ::1 at 2021-06-23 20:14:14 -0400
+Processing by FavoritesController#destroy as */*
+  Parameters: {"id"=>"10"}
+  [1m[36mFavorite Load (0.2ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:26:in `destroy'
+Completed 404 Not Found in 1ms (ActiveRecord: 0.2ms | Allocations: 489)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Favorite with 'id'=10):
+  
+app/controllers/favorites_controller.rb:26:in `destroy'
+Started GET "/users/1/favorites" for ::1 at 2021-06-23 20:14:33 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.1ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 2ms (Views: 0.7ms | ActiveRecord: 0.3ms | Allocations: 1099)
+
+
+Started GET "/users/1/favorites" for ::1 at 2021-06-23 20:14:35 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.1ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 2ms (Views: 0.8ms | ActiveRecord: 0.3ms | Allocations: 1098)
+
+
+Started GET "/users/1/favorites" for ::1 at 2021-06-23 20:14:37 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.1ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 2ms (Views: 0.8ms | ActiveRecord: 0.3ms | Allocations: 1098)
+
+
+Started POST "/users" for ::1 at 2021-06-23 20:33:52 -0400
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"email"=>"Bob@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "Bob@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:18:in `create'
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["email", "Bob@gmail.com"], ["password_digest", "$2a$12$U8BsQtfyHMUTqZ.HB7DhUuChUkFM2.k9Pc3OQdFTuIY.K3ex8Tgxy"], ["created_at", "2021-06-24 00:33:53.197748"], ["updated_at", "2021-06-24 00:33:53.197748"]]
+  ↳ app/controllers/users_controller.rb:18:in `create'
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:18:in `create'
+Completed 200 OK in 191ms (Views: 0.3ms | ActiveRecord: 3.2ms | Allocations: 10469)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 20:33:53 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.4ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 25ms (Views: 22.0ms | ActiveRecord: 1.0ms | Allocations: 9822)
+
+
+Started POST "/favorites" for ::1 at 2021-06-23 20:34:48 -0400
+Processing by FavoritesController#create as JSON
+  Parameters: {"user_id"=>"2", "gift_id"=>"1", "favorite"=>{"user_id"=>"2", "gift_id"=>"1"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mGift Load (0.1ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mFavorite Create (0.8ms)[0m  [1m[32mINSERT INTO "favorites" ("user_id", "gift_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["user_id", 2], ["gift_id", 1], ["created_at", "2021-06-24 00:34:48.745978"], ["updated_at", "2021-06-24 00:34:48.745978"]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+Completed 200 OK in 17ms (Views: 0.4ms | ActiveRecord: 3.6ms | Allocations: 8156)
+
+
+Started GET "/users/2/favorites" for ::1 at 2021-06-23 20:34:50 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.2ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 2]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+  [1m[36mGift Load (0.1ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 6ms (Views: 2.2ms | ActiveRecord: 0.5ms | Allocations: 3137)
+
+
+Started POST "/users" for ::1 at 2021-06-23 20:35:10 -0400
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"email"=>"Bob@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "Bob@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9:in `create'
+Completed 200 OK in 185ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 630)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 20:35:10 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.3ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 4ms (Views: 3.4ms | ActiveRecord: 0.3ms | Allocations: 3612)
+
+
+Started GET "/users/2/favorites" for ::1 at 2021-06-23 20:35:17 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.1ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 2]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+  [1m[36mGift Load (0.2ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.5ms | Allocations: 2080)
+
+
+Started GET "/users/2/favorites" for ::1 at 2021-06-23 20:35:23 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"2"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.1ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 2]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+  [1m[36mGift Load (0.2ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 5ms (Views: 3.4ms | ActiveRecord: 0.6ms | Allocations: 2062)
+
+
+Started DELETE "/favorites/11" for ::1 at 2021-06-23 20:35:24 -0400
+Processing by FavoritesController#destroy as */*
+  Parameters: {"id"=>"11"}
+  [1m[36mFavorite Load (0.2ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."id" = ? LIMIT ?[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:26:in `destroy'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mFavorite Destroy (0.9ms)[0m  [1m[31mDELETE FROM "favorites" WHERE "favorites"."id" = ?[0m  [["id", 11]]
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+Completed 204 No Content in 8ms (ActiveRecord: 2.2ms | Allocations: 2731)
+
+
+Started GET "/users/2/favorites" for ::1 at 2021-06-23 20:35:24 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.2ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 2]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.4ms | Allocations: 1098)
+
+
+Started GET "/users/2/favorites" for ::1 at 2021-06-23 20:35:26 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.3ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 2]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 2ms (Views: 0.8ms | ActiveRecord: 0.4ms | Allocations: 1098)
+
+
+Started GET "/users/2/favorites" for ::1 at 2021-06-23 20:35:28 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.1ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 2]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 3ms (Views: 1.3ms | ActiveRecord: 0.3ms | Allocations: 1100)
+
+
+Started POST "/favorites" for ::1 at 2021-06-23 20:35:31 -0400
+Processing by FavoritesController#create as JSON
+  Parameters: {"user_id"=>"2", "gift_id"=>"14", "favorite"=>{"user_id"=>"2", "gift_id"=>"14"}}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mGift Load (0.1ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mFavorite Create (0.8ms)[0m  [1m[32mINSERT INTO "favorites" ("user_id", "gift_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["user_id", 2], ["gift_id", 14], ["created_at", "2021-06-24 00:35:31.121042"], ["updated_at", "2021-06-24 00:35:31.121042"]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+Completed 200 OK in 12ms (Views: 0.2ms | ActiveRecord: 2.4ms | Allocations: 4170)
+
+
+Started POST "/favorites" for ::1 at 2021-06-23 20:35:32 -0400
+Processing by FavoritesController#create as JSON
+  Parameters: {"user_id"=>"2", "gift_id"=>"15", "favorite"=>{"user_id"=>"2", "gift_id"=>"15"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mGift Load (0.1ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mFavorite Create (1.0ms)[0m  [1m[32mINSERT INTO "favorites" ("user_id", "gift_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["user_id", 2], ["gift_id", 15], ["created_at", "2021-06-24 00:35:32.104190"], ["updated_at", "2021-06-24 00:35:32.104190"]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+Completed 200 OK in 13ms (Views: 0.2ms | ActiveRecord: 2.7ms | Allocations: 4126)
+
+
+Started POST "/favorites" for ::1 at 2021-06-23 20:35:33 -0400
+Processing by FavoritesController#create as JSON
+  Parameters: {"user_id"=>"2", "gift_id"=>"18", "favorite"=>{"user_id"=>"2", "gift_id"=>"18"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mGift Load (0.4ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 18], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mFavorite Create (1.0ms)[0m  [1m[32mINSERT INTO "favorites" ("user_id", "gift_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["user_id", 2], ["gift_id", 18], ["created_at", "2021-06-24 00:35:33.360370"], ["updated_at", "2021-06-24 00:35:33.360370"]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+Completed 200 OK in 15ms (Views: 0.3ms | ActiveRecord: 3.1ms | Allocations: 4166)
+
+
+Started POST "/favorites" for ::1 at 2021-06-23 20:35:34 -0400
+Processing by FavoritesController#create as JSON
+  Parameters: {"user_id"=>"2", "gift_id"=>"19", "favorite"=>{"user_id"=>"2", "gift_id"=>"19"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mGift Load (0.1ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 19], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mFavorite Create (1.0ms)[0m  [1m[32mINSERT INTO "favorites" ("user_id", "gift_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["user_id", 2], ["gift_id", 19], ["created_at", "2021-06-24 00:35:34.197881"], ["updated_at", "2021-06-24 00:35:34.197881"]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+Completed 200 OK in 10ms (Views: 0.2ms | ActiveRecord: 2.9ms | Allocations: 4181)
+
+
+Started POST "/favorites" for ::1 at 2021-06-23 20:35:35 -0400
+Processing by FavoritesController#create as JSON
+  Parameters: {"user_id"=>"2", "gift_id"=>"20", "favorite"=>{"user_id"=>"2", "gift_id"=>"20"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mGift Load (0.0ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mFavorite Create (1.2ms)[0m  [1m[32mINSERT INTO "favorites" ("user_id", "gift_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["user_id", 2], ["gift_id", 20], ["created_at", "2021-06-24 00:35:35.159932"], ["updated_at", "2021-06-24 00:35:35.159932"]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+Completed 200 OK in 9ms (Views: 0.3ms | ActiveRecord: 3.0ms | Allocations: 4169)
+
+
+Started GET "/users/2/favorites" for ::1 at 2021-06-23 20:35:37 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.2ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 2]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+  [1m[36mGift Load (0.2ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+  [1m[36mGift Load (0.3ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+  [1m[36mGift Load (0.1ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 18], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+  [1m[36mGift Load (0.2ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 19], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+  [1m[36mGift Load (0.2ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 10ms (Views: 7.1ms | ActiveRecord: 1.3ms | Allocations: 5911)
+
+
+Started DELETE "/favorites/14" for ::1 at 2021-06-23 20:35:43 -0400
+Processing by FavoritesController#destroy as */*
+  Parameters: {"id"=>"14"}
+  [1m[36mFavorite Load (0.2ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:26:in `destroy'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mFavorite Destroy (1.2ms)[0m  [1m[31mDELETE FROM "favorites" WHERE "favorites"."id" = ?[0m  [["id", 14]]
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+Completed 204 No Content in 6ms (ActiveRecord: 2.8ms | Allocations: 2600)
+
+
+Started GET "/users/2/favorites" for ::1 at 2021-06-23 20:35:43 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.1ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 2]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+  [1m[36mGift Load (0.1ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+  [1m[36mGift Load (0.5ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+  [1m[36mGift Load (0.5ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 19], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+  [1m[36mGift Load (0.2ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 12ms (Views: 9.0ms | ActiveRecord: 1.8ms | Allocations: 4949)
+
+
+Started DELETE "/favorites/16" for ::1 at 2021-06-23 20:35:44 -0400
+Processing by FavoritesController#destroy as */*
+  Parameters: {"id"=>"16"}
+  [1m[36mFavorite Load (0.2ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."id" = ? LIMIT ?[0m  [["id", 16], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:26:in `destroy'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mFavorite Destroy (0.8ms)[0m  [1m[31mDELETE FROM "favorites" WHERE "favorites"."id" = ?[0m  [["id", 16]]
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+Completed 204 No Content in 5ms (ActiveRecord: 2.2ms | Allocations: 2600)
+
+
+Started GET "/users/2/favorites" for ::1 at 2021-06-23 20:35:44 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.1ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 2]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+  [1m[36mGift Load (0.2ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+  [1m[36mGift Load (0.2ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+  [1m[36mGift Load (0.1ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 19], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 6ms (Views: 4.3ms | ActiveRecord: 0.7ms | Allocations: 3986)
+
+
+Started DELETE "/favorites/15" for ::1 at 2021-06-23 20:35:46 -0400
+Processing by FavoritesController#destroy as */*
+  Parameters: {"id"=>"15"}
+  [1m[36mFavorite Load (0.4ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:26:in `destroy'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mFavorite Destroy (1.0ms)[0m  [1m[31mDELETE FROM "favorites" WHERE "favorites"."id" = ?[0m  [["id", 15]]
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+Completed 204 No Content in 6ms (ActiveRecord: 2.5ms | Allocations: 2338)
+
+
+Started GET "/users/2/favorites" for ::1 at 2021-06-23 20:35:46 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.1ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 2]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+  [1m[36mGift Load (0.1ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+  [1m[36mGift Load (0.2ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 5ms (Views: 3.8ms | ActiveRecord: 0.6ms | Allocations: 3019)
+
+
+Started DELETE "/favorites/13" for ::1 at 2021-06-23 20:35:46 -0400
+Processing by FavoritesController#destroy as */*
+  Parameters: {"id"=>"13"}
+  [1m[36mFavorite Load (0.2ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:26:in `destroy'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mFavorite Destroy (0.9ms)[0m  [1m[31mDELETE FROM "favorites" WHERE "favorites"."id" = ?[0m  [["id", 13]]
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+Completed 204 No Content in 5ms (ActiveRecord: 2.1ms | Allocations: 2600)
+
+
+Started GET "/users/2/favorites" for ::1 at 2021-06-23 20:35:46 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.2ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 2]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+  [1m[36mGift Load (0.3ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 13ms (Views: 10.8ms | ActiveRecord: 0.6ms | Allocations: 2061)
+
+
+Started DELETE "/favorites/12" for ::1 at 2021-06-23 20:35:48 -0400
+Processing by FavoritesController#destroy as */*
+  Parameters: {"id"=>"12"}
+  [1m[36mFavorite Load (0.2ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:26:in `destroy'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mFavorite Destroy (0.8ms)[0m  [1m[31mDELETE FROM "favorites" WHERE "favorites"."id" = ?[0m  [["id", 12]]
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+Completed 204 No Content in 5ms (ActiveRecord: 2.3ms | Allocations: 2600)
+
+
+Started GET "/users/2/favorites" for ::1 at 2021-06-23 20:35:48 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.2ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 2]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 3ms (Views: 1.1ms | ActiveRecord: 0.4ms | Allocations: 1098)
+
+
+Started POST "/favorites" for ::1 at 2021-06-23 20:35:51 -0400
+Processing by FavoritesController#create as JSON
+  Parameters: {"user_id"=>"2", "gift_id"=>"5", "favorite"=>{"user_id"=>"2", "gift_id"=>"5"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mGift Load (0.0ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mFavorite Create (0.8ms)[0m  [1m[32mINSERT INTO "favorites" ("user_id", "gift_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["user_id", 2], ["gift_id", 5], ["created_at", "2021-06-24 00:35:51.333286"], ["updated_at", "2021-06-24 00:35:51.333286"]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 2.0ms | Allocations: 4545)
+
+
+Started GET "/users/2/favorites" for ::1 at 2021-06-23 20:35:54 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.1ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 2]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+  [1m[36mGift Load (0.1ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.4ms | Allocations: 2065)
+
+
+Started DELETE "/favorites/17" for ::1 at 2021-06-23 20:36:18 -0400
+Processing by FavoritesController#destroy as */*
+  Parameters: {"id"=>"17"}
+  [1m[36mFavorite Load (0.2ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."id" = ? LIMIT ?[0m  [["id", 17], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:26:in `destroy'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mFavorite Destroy (0.8ms)[0m  [1m[31mDELETE FROM "favorites" WHERE "favorites"."id" = ?[0m  [["id", 17]]
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+Completed 204 No Content in 5ms (ActiveRecord: 2.2ms | Allocations: 2600)
+
+
+Started GET "/users/2/favorites" for ::1 at 2021-06-23 20:36:18 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.1ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 2]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 2ms (Views: 0.8ms | ActiveRecord: 0.3ms | Allocations: 1098)
+
+
+Started POST "/users" for ::1 at 2021-06-23 20:36:29 -0400
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"email"=>"qq@qq.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "qq@qq.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9:in `create'
+Completed 200 OK in 204ms (Views: 0.4ms | ActiveRecord: 0.2ms | Allocations: 611)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 20:36:30 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.3ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 4ms (Views: 3.5ms | ActiveRecord: 0.3ms | Allocations: 3610)
+
+
+Started POST "/users" for ::1 at 2021-06-23 20:37:03 -0400
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"email"=>"Bob@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "Bob@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9:in `create'
+Completed 200 OK in 182ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 612)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 20:37:03 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.5ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 5ms (Views: 4.5ms | ActiveRecord: 0.5ms | Allocations: 3610)
+
+
+Started POST "/favorites" for ::1 at 2021-06-23 20:39:06 -0400
+Processing by FavoritesController#create as JSON
+  Parameters: {"user_id"=>"2", "gift_id"=>"1", "favorite"=>{"user_id"=>"2", "gift_id"=>"1"}}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mGift Load (0.0ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mFavorite Create (0.8ms)[0m  [1m[32mINSERT INTO "favorites" ("user_id", "gift_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["user_id", 2], ["gift_id", 1], ["created_at", "2021-06-24 00:39:06.379613"], ["updated_at", "2021-06-24 00:39:06.379613"]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 2.1ms | Allocations: 4126)
+
+
+Started GET "/users/2/favorites" for ::1 at 2021-06-23 20:39:07 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.1ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 2]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+  [1m[36mGift Load (0.1ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.4ms | Allocations: 2061)
+
+
+Started DELETE "/favorites/18" for ::1 at 2021-06-23 20:39:09 -0400
+Processing by FavoritesController#destroy as */*
+  Parameters: {"id"=>"18"}
+  [1m[36mFavorite Load (0.2ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."id" = ? LIMIT ?[0m  [["id", 18], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:26:in `destroy'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mFavorite Destroy (0.9ms)[0m  [1m[31mDELETE FROM "favorites" WHERE "favorites"."id" = ?[0m  [["id", 18]]
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+Completed 204 No Content in 5ms (ActiveRecord: 2.1ms | Allocations: 2600)
+
+
+Started GET "/users/2/favorites" for ::1 at 2021-06-23 20:39:09 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.1ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 2]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 2ms (Views: 0.9ms | ActiveRecord: 0.3ms | Allocations: 1098)
+
+
+Started DELETE "/favorites/18" for ::1 at 2021-06-23 20:43:34 -0400
+Processing by FavoritesController#destroy as */*
+  Parameters: {"id"=>"18"}
+  [1m[36mFavorite Load (0.2ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."id" = ? LIMIT ?[0m  [["id", 18], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:26:in `destroy'
+Completed 404 Not Found in 1ms (ActiveRecord: 0.2ms | Allocations: 489)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Favorite with 'id'=18):
+  
+app/controllers/favorites_controller.rb:26:in `destroy'
+Started POST "/favorites" for ::1 at 2021-06-23 20:43:35 -0400
+Processing by FavoritesController#create as JSON
+  Parameters: {"user_id"=>"2", "gift_id"=>"1", "favorite"=>{"user_id"=>"2", "gift_id"=>"1"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mGift Load (0.0ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mFavorite Create (0.9ms)[0m  [1m[32mINSERT INTO "favorites" ("user_id", "gift_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["user_id", 2], ["gift_id", 1], ["created_at", "2021-06-24 00:43:35.405361"], ["updated_at", "2021-06-24 00:43:35.405361"]]
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:9:in `create'
+Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 2.2ms | Allocations: 4163)
+
+
+Started GET "/users/2/favorites" for ::1 at 2021-06-23 20:43:36 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.1ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 2]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+  [1m[36mGift Load (0.2ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 4ms (Views: 2.5ms | ActiveRecord: 0.5ms | Allocations: 2061)
+
+
+Started DELETE "/favorites/19" for ::1 at 2021-06-23 20:45:29 -0400
+Processing by FavoritesController#destroy as */*
+  Parameters: {"id"=>"19"}
+  [1m[36mFavorite Load (0.2ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."id" = ? LIMIT ?[0m  [["id", 19], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:26:in `destroy'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mFavorite Destroy (0.8ms)[0m  [1m[31mDELETE FROM "favorites" WHERE "favorites"."id" = ?[0m  [["id", 19]]
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/favorites_controller.rb:27:in `destroy'
+Completed 204 No Content in 6ms (ActiveRecord: 2.3ms | Allocations: 2611)
+
+
+Started GET "/users/2/favorites" for ::1 at 2021-06-23 20:45:29 -0400
+Processing by FavoritesController#index as */*
+  Parameters: {"user_id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/favorites_controller.rb:18:in `index'
+  [1m[36mFavorite Load (0.1ms)[0m  [1m[34mSELECT "favorites".* FROM "favorites" WHERE "favorites"."user_id" = ?[0m  [["user_id", 2]]
+  ↳ app/controllers/favorites_controller.rb:20:in `index'
+Completed 200 OK in 2ms (Views: 0.7ms | ActiveRecord: 0.3ms | Allocations: 1098)
+
+
+Started POST "/users" for ::1 at 2021-06-23 20:46:06 -0400
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"email"=>"Bob@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "Bob@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9:in `create'
+Completed 200 OK in 187ms (Views: 0.4ms | ActiveRecord: 0.2ms | Allocations: 611)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 20:46:06 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.3ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.3ms | Allocations: 3610)
+
+
+Started POST "/users" for ::1 at 2021-06-23 20:50:13 -0400
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"email"=>"qq@qq.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "qq@qq.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9:in `create'
+Completed 200 OK in 178ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 611)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 20:50:13 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.2ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 3ms (Views: 2.6ms | ActiveRecord: 0.2ms | Allocations: 3610)
+
+
+Started POST "/users" for ::1 at 2021-06-23 20:59:59 -0400
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"email"=>"Bob@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/users_controller.rb:9:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "Bob@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9:in `create'
+Completed 200 OK in 178ms (Views: 0.3ms | ActiveRecord: 0.5ms | Allocations: 1075)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 20:59:59 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.4ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.4ms | Allocations: 3633)
+
+
+Started POST "/users" for ::1 at 2021-06-23 21:05:51 -0400
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"email"=>"qq@qq.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "qq@qq.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9:in `create'
+Completed 200 OK in 182ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 611)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:05:51 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.2ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 0.2ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:07:44 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.2ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.2ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:08:21 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.2ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.2ms | Allocations: 3611)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:14:56 -0400
+Processing by GiftsController#index as */*
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+  [1m[36mGift Load (0.2ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 4ms (Views: 3.9ms | ActiveRecord: 0.6ms | Allocations: 4194)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:14:57 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.4ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 6ms (Views: 5.1ms | ActiveRecord: 0.4ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:15:01 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.5ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 6ms (Views: 4.8ms | ActiveRecord: 0.5ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:15:13 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.3ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 0.3ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:24:06 -0400
+Processing by GiftsController#index as */*
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+  [1m[36mGift Load (0.6ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 7ms (Views: 7.0ms | ActiveRecord: 1.2ms | Allocations: 4194)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:24:06 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.3ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 4ms (Views: 3.6ms | ActiveRecord: 0.3ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:24:09 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.3ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 4ms (Views: 3.5ms | ActiveRecord: 0.3ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:26:12 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.4ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 5ms (Views: 3.9ms | ActiveRecord: 0.4ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:26:18 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.3ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 5ms (Views: 4.0ms | ActiveRecord: 0.3ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:26:19 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.3ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.3ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:26:24 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.3ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 0.3ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:28:13 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.4ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 5ms (Views: 3.8ms | ActiveRecord: 0.4ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:28:14 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.7ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 6ms (Views: 4.8ms | ActiveRecord: 0.7ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:28:14 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.2ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.2ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:28:17 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.2ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 12ms (Views: 11.8ms | ActiveRecord: 0.2ms | Allocations: 3611)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:30:04 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.5ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 6ms (Views: 4.8ms | ActiveRecord: 0.5ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:30:05 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.2ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 4ms (Views: 3.3ms | ActiveRecord: 0.2ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:32:34 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.3ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 4ms (Views: 3.7ms | ActiveRecord: 0.3ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:32:35 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.5ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 6ms (Views: 4.8ms | ActiveRecord: 0.5ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:32:36 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.2ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 4ms (Views: 3.4ms | ActiveRecord: 0.2ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:32:40 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.3ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 4ms (Views: 3.5ms | ActiveRecord: 0.3ms | Allocations: 3610)
+
+
+Started POST "/users" for ::1 at 2021-06-23 21:33:07 -0400
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"email"=>"qq@qq.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "qq@qq.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9:in `create'
+Completed 200 OK in 177ms (Views: 0.3ms | ActiveRecord: 0.3ms | Allocations: 629)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:33:07 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.3ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.3ms | Allocations: 3610)
+
+
+Started POST "/users" for ::1 at 2021-06-23 21:33:18 -0400
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"email"=>"qq@qq.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "qq@qq.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9:in `create'
+Completed 200 OK in 181ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 611)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:33:18 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.3ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.3ms | Allocations: 3610)
+
+
+Started POST "/users" for ::1 at 2021-06-23 21:33:39 -0400
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"email"=>"qq@qq.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "qq@qq.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9:in `create'
+Completed 200 OK in 184ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 612)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:33:39 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.2ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.2ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:34:24 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.3ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 4ms (Views: 3.5ms | ActiveRecord: 0.3ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:34:26 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.3ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 4ms (Views: 3.3ms | ActiveRecord: 0.3ms | Allocations: 3610)
+
+
+Started POST "/users" for ::1 at 2021-06-23 21:38:32 -0400
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"email"=>"Bob@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "Bob@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9:in `create'
+Completed 200 OK in 180ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 611)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:38:32 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.2ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 0.2ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:38:40 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.3ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 4ms (Views: 3.7ms | ActiveRecord: 0.3ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:41:10 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.2ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 15ms (Views: 14.3ms | ActiveRecord: 0.2ms | Allocations: 3611)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:41:11 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.7ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 7ms (Views: 5.8ms | ActiveRecord: 0.7ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 21:41:20 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.3ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 4ms (Views: 3.4ms | ActiveRecord: 0.3ms | Allocations: 3610)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 22:55:54 -0400
+Processing by GiftsController#index as */*
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+  [1m[36mGift Load (0.4ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 6ms (Views: 6.0ms | ActiveRecord: 0.8ms | Allocations: 4194)
+
+
+Started GET "/gifts" for ::1 at 2021-06-23 22:57:14 -0400
+Processing by GiftsController#index as */*
+  [1m[36mGift Load (0.3ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts"[0m
+  ↳ app/controllers/gifts_controller.rb:6:in `index'
+Completed 200 OK in 4ms (Views: 3.5ms | ActiveRecord: 0.3ms | Allocations: 3610)
+
+

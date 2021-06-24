@@ -10,6 +10,8 @@ const signupForm = document.querySelector('#signup-form')
 const signupInputs = document.querySelectorAll(".signup-input")
 const header = document.querySelector('.header-banner')
 const logout = document.querySelector('.logout')
+const userComments = document.querySelector('#user-comments')
+const userCommentsForm = document.querySelector('#user-comments-form')
 let currentUser
 
 class Gift {
@@ -80,6 +82,7 @@ function loggedInUser(object) {
 }
 
 signupForm.addEventListener('submit', function (e) {
+    //debugger
     e.preventDefault();
     console.log('gdddot here==>>', e, 'll', signupInputs)
     fetch(USERS_URL, {
@@ -117,6 +120,18 @@ logout.addEventListener('click', (e) => {
     signupInputs[1].value = '';
     localStorage.removeItem('user');
 });
+
+userCommentsForm.addEventListener('submit', function (e){
+    //debugger
+    e.preventDefault(); 
+    // add on the upper comments and recreate a new line everytime something else is submit.
+    // clear the for after.
+    console.log('#userCommentsForm', e, 'll', userCommentsForm)  
+    const searchInput = document.getElementById('search-input').value
+    userComments.innerHTML = searchInput;
+    
+})
+
 
 giftCollection.addEventListener('click', function (e) {
     if (event.target.className == "favorites-link") {
